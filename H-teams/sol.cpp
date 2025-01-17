@@ -20,11 +20,26 @@ struct state {
 };
 
 void solve() {
+        /**
+         * BLOCK: INPUT
+         * IN: standard input
+         * OUT: player skills
+         */
         int n,m,ka,kb;cin>>n>>m>>ka>>kb;
         vector<int> skill(n); for (int i=0;i<n;i++) cin >> skill[i];
 
+        /**
+         * BLOCK: SKILL SUMMER
+         * IN: player skills
+         * OUT: sum of all player skills
+         */
         int total_skill = 0; for (int i=0;i<n;i++) total_skill += skill[i];
 
+        /**
+         * BLOCK: ADJ. LIST CONSTRUCTOR
+         * IN: standard input
+         * OUT: adjacency list
+         */
         vector<vector<int>> adj(n);
         for (int i=0;i<m;i++) {
                 int u,v;cin>>u>>v;u--;v--;  // 0-index
@@ -32,9 +47,13 @@ void solve() {
                 adj[v].push_back(u);
         }
 
+        /**
+         * BLOCK: CC FINDER
+         * IN: adj. list, player skills
+         * OUT: friendship groups
+         */
         vector<friendship_group> fgs;
         vector<bool> vis(n);
-
         function<void(int)> dfs = [&](int x) {
                 if (vis[x]) return;
                 vis[x] = true;
@@ -51,6 +70,15 @@ void solve() {
                 }
         }
 
+        /**
+         * BLOCK: KNAPSACK DP
+         * IN: friendship groups
+         * OUT: A knapsack dp array that:
+         *      1. shows whether the first i friendship groups can produce
+         *              exactly v players and w skill
+         *      2. if so, gives the last state where a friendship group was
+         *              added to team A to reach the current state
+         */
         state DNE = {-10, -10, -10};  // arbitrary negative value
         state ORIGIN = {-1, -1, -1};
 
@@ -72,6 +100,12 @@ void solve() {
                 }
         }
 
+        /**
+         * BLOCK: SOLUTION UNPACKER
+         * IN: knapsack dp array
+         * OUT: team a players (printed)
+         * METHOD: check if team A configs work; track backwards from working solution
+         */
         for (int i=1;i<=fgs.size();i++) {
                 for (int wa=ka;wa>=1;wa--) {
                         if (dp[i][n/2][wa] != DNE) {
