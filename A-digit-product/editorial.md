@@ -12,7 +12,7 @@ This is about $r \log_{10} r = 6 \cdot 10^6$ operations.
 
 ---
 
-Digit Product V is solvable in $O\left(y \log_{10}r\right)$ using DP. Specifically what DP?
+Digit Product IV is solvable in $O\left(y \log_{10}r\right)$ using DP. Specifically what DP?
 
 <details><summary>Think</summary>
 

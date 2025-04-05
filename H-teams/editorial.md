@@ -1,5 +1,4 @@
 <!-- NOTE: TEST CHECKER -->
-# NOTE TO SELF TEST TEAMS CHECKER
 
 # Teams
 
