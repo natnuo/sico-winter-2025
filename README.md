@@ -1,1 +1,4 @@
-# sico-winter-2025
+# The Scarsdale Informatics Competition
+Winter, 2025
+
+
